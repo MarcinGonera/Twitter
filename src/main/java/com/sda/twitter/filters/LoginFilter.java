@@ -15,10 +15,14 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
-        final HttpSession session = request.getSession();
-        final TbUser currentUser = (TbUser) session.getAttribute("currentUser");
+        HttpSession session = request.getSession();
+        TbUser currentUser = (TbUser) session.getAttribute("currentUser");
         if (currentUser == null) {
-            final RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
+
+            final String requestURI = request.getRequestURI();
+            request.setAttribute("cuccrentURI", requestURI);
+
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
             requestDispatcher.forward(req, response);
         }
         chain.doFilter(req, response);
