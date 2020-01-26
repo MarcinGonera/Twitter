@@ -20,7 +20,7 @@ public class LoginFilter implements Filter {
         if (currentUser == null) {
 
             final String requestURI = request.getRequestURI();
-            request.setAttribute("cuccrentURI", requestURI);
+            request.setAttribute("currentURI", requestURI);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
             requestDispatcher.forward(req, response);
